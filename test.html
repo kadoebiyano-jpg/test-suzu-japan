@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exclusive Offer</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  background:#fff;
+  color:#484848;
+  font-family:"Times New Roman","Yu Mincho","YuMincho",serif;
+  letter-spacing:0.02em;
+}
+
+.bg-video{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:0;
+}
+
+.video-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(255,255,255,0.55);
+  z-index:1;
+}
+
+.page{
+  position:relative;
+  z-index:2;
+  max-width:500px;
+  margin:0 auto;
+  background:rgba(255,255,255,0.14);
+  backdrop-filter:blur(6px);
+}
+
+.hero{
+  padding:75px 50px 35px;
+}
+
+.hero-title{
+  font-family:'Tangerine', cursive;
+  font-size:100px;
+  line-height:0.75;
+  text-align:center;
+  margin-bottom:70px;
+  font-weight:400;
+  letter-spacing:-0.09em;
+  color:#484848;
+  text-shadow:0 2px 12px rgba(0,0,0,0.12);
+}
+
+.hero-title span{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(18px);
+  filter:blur(8px);
+  animation:letterFlow 1.2s ease forwards;
+}
+
+.hero-title span:nth-child(1){animation-delay:.05s;}
+.hero-title span:nth-child(2){animation-delay:.1s;}
+.hero-title span:nth-child(3){animation-delay:.15s;}
+.hero-title span:nth-child(4){animation-delay:.2s;}
+.hero-title span:nth-child(5){animation-delay:.25s;}
+.hero-title span:nth-child(6){animation-delay:.3s;}
+.hero-title span:nth-child(7){animation-delay:.35s;}
+.hero-title span:nth-child(8){animation-delay:.4s;}
+.hero-title span:nth-child(9){animation-delay:.45s;}
+.hero-title span:nth-child(11){animation-delay:.6s;}
+.hero-title span:nth-child(12){animation-delay:.65s;}
+.hero-title span:nth-child(13){animation-delay:.7s;}
+.hero-title span:nth-child(14){animation-delay:.75s;}
+.hero-title span:nth-child(15){animation-delay:.8s;}
+.hero-title span:nth-child(16){animation-delay:.85s;}
+.hero-title span:nth-child(17){animation-delay:.9s;}
+.hero-title span:nth-child(18){animation-delay:.95s;}
+.hero-title span:nth-child(19){animation-delay:1s;}
+.hero-title span:nth-child(20){animation-delay:1.05s;}
+
+@keyframes letterFlow{
+  0%{
+    opacity:0;
+    transform:translateY(18px);
+    filter:blur(8px);
+  }
+
+  100%{
+    opacity:1;
+    transform:translateY(0);
+    filter:blur(0);
+  }
+}
+
+.lead-text{
+
+  font-family:'Playfair Display', serif;
+
+  font-size:15px;
+
+  line-height:1.9;
+
+  font-weight:300;
+
+  letter-spacing:0.03em;
+
+  color:#484848;
+}
+
+.lead-text p{
+
+  opacity:0;
+
+  transform:translateY(24px);
+
+  filter:blur(10px);
+
+  animation:softFade 2s ease forwards;
+}
+
+.lead-text p:nth-child(1){animation-delay:1.2s;}
+.lead-text p:nth-child(2){animation-delay:1.8s;}
+.lead-text p:nth-child(3){animation-delay:2.4s;}
+.lead-text p:nth-child(4){animation-delay:3s;}
+
+@keyframes softFade{
+  0%{
+    opacity:0;
+    transform:translateY(24px);
+    filter:blur(10px);
+  }
+
+  100%{
+    opacity:1;
+    transform:translateY(0);
+    filter:blur(0);
+  }
+}
+
+.about{
+  background:rgba(205,205,205,0.72);
+  backdrop-filter:blur(10px);
+  padding:42px 48px;
+  width:calc(100% - 96px);
+  margin:0 auto;
+  box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+.about-image{
+  width:100%;
+  display:block;
+  margin-bottom:28px;
+}
+
+.about-text{
+
+  font-family:'Playfair Display', serif;
+
+  font-size:15px;
+
+  line-height:1.9;
+
+  font-weight:300;
+
+  letter-spacing:0.03em;
+
+  color:#484848;
+}
+
+.about-text strong{
+
+  font-family:'Playfair Display', serif;
+
+  font-size:18px;
+
+  line-height:1.9;
+
+  font-weight:600;
+
+  /* ←かなり狭く */
+   letter-spacing:0.03em;
+
+  color:#111;
+}
+
+
+.fade-section{
+  opacity:0;
+  transform:translateY(60px);
+  filter:blur(18px);
+  transition:
+    opacity 3s cubic-bezier(0.19,1,0.22,1),
+    transform 3s cubic-bezier(0.19,1,0.22,1),
+    filter 3s cubic-bezier(0.19,1,0.22,1);
+}
+
+.fade-section.show{
+  opacity:1;
+  transform:translateY(0);
+  filter:blur(0);
+}
+
+.fade-item{
+  opacity:0;
+  transform:translateY(20px);
+  filter:blur(10px);
+}
+
+.fade-section.show .fade-item{
+  animation:softItemFade 2.8s ease forwards;
+}
+
+.fade-section.show .fade-item:nth-child(1){animation-delay:.4s;}
+.fade-section.show .fade-item:nth-child(2){animation-delay:1s;}
+.fade-section.show .fade-item:nth-child(3){animation-delay:1.6s;}
+
+@keyframes softItemFade{
+  0%{
+    opacity:0;
+    transform:translateY(20px);
+    filter:blur(10px);
+  }
+
+  100%{
+    opacity:1;
+    transform:translateY(0);
+    filter:blur(0);
+  }
+}
+
+.reservation{
+  padding:45px 0 70px;
+  text-align:center;
+}
+
+.reservation-title{
+
+  font-family:'Playfair Display', serif;
+
+  font-size:30px;
+
+  line-height:1.45;
+
+  /* ←ここを増やす */
+  margin-top:40px;
+
+  margin-bottom:45px;
+
+  font-weight:300;
+
+    letter-spacing:0.02em;
+  color:#484848;
+}
+
+.reservation-inner{
+  padding:0 48px;
+}
+
+.copy-button{
+  display:block;
+  width:100%;
+  border:none;
+  background:none;
+  padding:0;
+  font-family:inherit;
+  color:#000;
+}
+
+.copy-box{
+
+  font-family:'Playfair Display', serif;
+
+  width:100%;
+
+  box-sizing:border-box;
+
+  /* ← about と合わせる */
+  background:rgba(205,205,205,0.72);
+
+  backdrop-filter:blur(10px);
+
+  padding:24px 30px;
+
+  text-align:left;
+
+  font-size:13px;
+
+  line-height:1.9;
+
+  cursor:pointer;
+
+  font-weight:600;
+
+  letter-spacing:0.03em;
+
+  color:#484848;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.05);
+}
+.copy-box:active{
+  opacity:.82;
+}
+
+.notice{
+  
+
+  font-family:'Playfair Display', serif;
+
+  font-size:16px;
+
+  line-height:1.7;
+
+  /* ←ここ */
+  margin-top:38px;
+
+  margin-bottom:24px;
+
+   letter-spacing:0.03em;
+
+  font-weight:300;
+}
+
+.notice-red{
+  display:block;
+
+  font-family:'Playfair Display', serif;
+
+  color:#9b1d1d;
+
+  font-size:13px;
+
+  font-weight:400;
+
+  letter-spacing:0.03em;
+}
+
+.btn_box{
+  text-align:center;
+
+  /* ←追加 */
+  margin-top:40px;
+}
+
+.reserve-btn{
+  display:inline-block;
+  width:260px;
+  height:58px;
+  line-height:58px;
+  color:#fff;
+  text-decoration:none;
+  text-align:center;
+  font-size:22px;
+  font-weight:600;
+  letter-spacing:0.12em;
+  border-radius:999px;
+  background:
+    linear-gradient(
+      135deg,
+      #6f6f6f 0%,
+      #9a9a9a 45%,
+      #d8d8d8 100%
+    );
+  box-shadow:inset 0 5px 15px rgba(0,0,0,0.22);
+  transition:all .3s ease;
+}
+
+.reserve-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.22);
+  filter:brightness(1.05);
+}
+
+#copyToast{
+  display:none;
+  position:fixed;
+  top:70px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#2d2a35;
+  color:#fff;
+  padding:18px 26px;
+  border-radius:10px;
+  z-index:999999;
+  font-size:16px;
+  letter-spacing:0.05em;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+</style>
+</head>
+
+<body>
+
+<video class="bg-video" autoplay muted loop playsinline>
+  <source src="movie.mp4" type="video/mp4">
+</video>
+
+<div class="video-overlay"></div>
+
+<main class="page">
+
+<section class="hero">
+
+<h1 class="hero-title">
+  <span>E</span>
+  <span>x</span>
+  <span>c</span>
+  <span>l</span>
+  <span>u</span>
+  <span>s</span>
+  <span>i</span>
+  <span>v</span>
+  <span>e</span>
+
+  <br>
+
+  <span>I</span>
+  <span>n</span>
+  <span>v</span>
+  <span>i</span>
+  <span>t</span>
+  <span>a</span>
+  <span>t</span>
+  <span>i</span>
+  <span>o</span>
+  <span>n</span>
+</h1>
+
+<div class="lead-text">
+  <p>
+    Thank you for your continued patronage of the Kadoebi Group, Ikebukuro POLARIS.
+  </p>
+
+  <p>
+    As a token of our appreciation,<br>
+    we have the honor of presenting a special bell known as “Suikinrei”<br>
+    exclusively to a select group of distinguished guests.
+  </p>
+
+  <p>
+    When visiting us,<br>
+    we kindly ask that you present this bell.
+  </p>
+
+  <p>
+    You will then be granted access to a special invitation prepared just for you.
+  </p>
+</div>
+
+</section>
+
+<section class="about fade-section">
+
+  <img src="suikinrei.jpg" alt="Suikinrei" class="about-image fade-item">
+
+  
+  <div class="about-text fade-item">
+    <strong>ABOUT THE SUIKINREI</strong> <br>
+    Reservations are accepted by phone or in person.
+    We don’t accept reservations via email or DM.
+    If you don't speak Japanese,
+    reservations can only be made in person.
+    Reservations can be made starting the day before.
+    Walk-ins are always welcome!!!
+  </div>
+
+</section>
+
+<section class="reservation fade-section">
+
+  <h2 class="reservation-title">
+    Reservations Available<br>
+    Up to 2 Weeks in Advance
+  </h2>
+
+  <div class="reservation-inner">
+
+    <button class="copy-button" onclick="copyButton('copytxt')">
+      <div class="copy-box">
+    <p id="copytxt" class="mb-0">
+  NAME:<br>
+  PREFERRED DATE:<br>
+  PREFERRED COMPANION:<br>
+  COURSE DURATION:
+</p>
+      </div>
+    </button>
+
+    <div class="notice">
+      ▲ Please include the following information when making a reservation.<br>
+
+      <span class="notice-red">
+        Please note that the LINE app must be installed in advance.
+      </span>
+    </div>
+
+  <div class="btn_box">
+  <a href="https://works.do/G0f1J19" class="reserve-btn" target="_blank" rel="noopener noreferrer">
+    RESERVE NOW
+  </a>
+</div>
+
+  </div>
+
+</section>
+
+</main>
+
+<div id="copyToast">Copied to clipboard!</div>
+
+<script>
+function copyButton(id){
+  const text = document.getElementById(id).innerText.trim();
+
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(showToast);
+  }else{
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+
+    document.body.appendChild(textarea);
+
+    textarea.focus();
+    textarea.select();
+
+    document.execCommand("copy");
+
+    document.body.removeChild(textarea);
+
+    showToast();
+  }
+}
+
+function showToast(){
+  const toast = document.getElementById("copyToast");
+
+  toast.style.display = "block";
+
+  setTimeout(function(){
+    toast.style.display = "none";
+  }, 2000);
+}
+
+const fadeSections = document.querySelectorAll('.fade-section');
+
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach((entry)=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }
+  });
+},{
+  threshold:0.05
+});
+
+fadeSections.forEach((section)=>{
+  observer.observe(section);
+});
+</script>
+
+</body>
+</html>
